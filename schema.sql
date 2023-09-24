@@ -1,4 +1,4 @@
-CREATE TABLE users (id SERIAL PRIMARY KEY, username TEXT, password TEXT);
+CREATE TABLE recipe(id SERIAL PRIMARY KEY, category_id INTEGER REFERENCES category, name TEXT, content TEXT);
 
-CREATE TABLE recipe(id SERIAL PRIMARY KEY, creator_id INTEGER REFERENCES users, name TEXT, content TEXT, creation TIMESTAMP);
+CREATE TABLE category(id SERIAL PRIMARY KEY,name TEXT);
 
