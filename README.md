@@ -34,32 +34,38 @@ kommenttejen lähetysaikojen päivämäärien ja kellonaikojen näyttäminen jne
 ## Käynnistysohjeet
 
 Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon:
-
+```
 git clone git@github.com:Mahlamaki/tsoha-keittokirja.git
 
 cd keittokirja
-
+```
 
 Luo kansioon .env-tiedosto ja tallenna sen sisällöksi tietokannan paikallinen osoite ja salainen avain:
 
+```
 DATABASE_URL=<tietokannan-paikallinen-osoite>
 SECRET_KEY=<salainen-avain>
-
+```
 
 Aktivoi virtuaaliympäristö ja asenna tarvittavat riippuvuudet seuraavien ohjeiden mukaisesti:
 
+```
 python3 -m venv venv
 source venv/bin/activate
 pip install flask-sqlalchemy
 pip install psycopg2
 pip install python-dotenv
-
+```
 
 Määritä skeema tietokannalle:
 HUOM! Jos sinulla on tietokannassasi saman nimisiä tauluja (recipe, category), sinun kannattaa luoda tätä varten toinen tietokanta. Tähän ohjeet löytyy kurssimateriaalista.
 
+```
 psql < schema.sql
+```
 
 Käynnistä sovellus:
 
+```
 flask run
+```
