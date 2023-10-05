@@ -20,5 +20,11 @@ def send():
     sql = f"INSERT INTO recipe (category_id, name, content) VALUES ('{category}','{name}', '{recipe}')"
     db.session.execute(text(sql))
     db.session.commit()
-    return redirect("/")
+    return render_template("move.html")
+    
+
+    
+
+    
+
 
