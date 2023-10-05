@@ -1,7 +1,13 @@
 <form action="/send" method="POST">
-Reseptin nimi: <input type="text" name="title" size ="35"> <br>
-Kirjoita resepti: <br>
-<textarea name="message" rows="20" cols="70">
+Reseptin nimi (max. 50 merkkiä): <input type="text" name="title" size ="35"minlength="1" maxlength="50"> <br>
+Mitä ruokalajia: <select name="category">
+<option value="1" selected> aamiainen
+<option value="2"> pääruoka
+<option value="3"> jälkiruoka
+</select>
+<br>
+Kirjoita resepti (max. 1000 merkkiä): <br>
+<textarea name="message" rows="20" cols="70" minlength="1" maxlength = "1000">
 </textarea> <br>
 <input type="submit" value="Tallenna">
 </form>
