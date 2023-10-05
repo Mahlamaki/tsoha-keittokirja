@@ -13,15 +13,13 @@ Sähköisessä keittokirjassa voit:
 <p>
 <a href="/luo-uusi-resepti">Luo uusi resepti</a>
 <p>
-
-<p>
-Selaa reseptejä:
-<p>
 Valitse ruokalaji:
-<select name="category">
-<option value="breakfast" selected> aamiainen
-<option value="main"> pääruoka
-<option value="dessert"> jälkiruoka
-<option value="all"> kaikki
+<br>
+<form action="/selaa/"  method ="POST">
+<select  name="category" method="POST">
+<option value="1" selected> Aamupala
+<option value="2"> Pääruoka
+<option value="3"> Jälkiruoka
 </select>
-
+<button type="submit">Valitse</button>
+</form>

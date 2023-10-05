@@ -23,7 +23,12 @@ def send():
     return render_template("move.html")
     
 
-    
+@app.route("/selaa/", methods=["GET","POST"])
+def browse():
+    category = request.form.get("category")
+    sql = f"SELECT name FROM category WHERE id = {category}"
+    data = db.session.execute(text(sql))
+    return render_template("browse.html", category = data )  
 
     
 
