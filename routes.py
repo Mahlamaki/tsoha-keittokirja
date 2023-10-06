@@ -26,9 +26,24 @@ def send():
 @app.route("/selaa/", methods=["GET","POST"])
 def browse():
     category = request.form.get("category")
-    sql = f"SELECT name FROM category WHERE id = {category}"
-    data = db.session.execute(text(sql))
-    return render_template("browse.html", category = data )  
+    
+    if category != "4":
+    	sql = f"SELECT recipe.name, recipe.content  FROM recipe, category WHERE category.id =recipe.category_id AND category.id = {category}";
+    	data = db.session.execute(text(sql))
+    	if category == "1":
+    		header = "Aamupalareseptejä"
+    	if category == "2":
+    		header = "Pääruokareseptejä"
+    	if category == "3":
+    		header = "Jälkiruokareseptejä"   		
+
+    else:
+    	sql = f"SELECT recipe.name, recipe.content FROM recipe";
+    	data = db.session.execute(text(sql))
+    	header ="Kaikki reseptit"
+    	
+   
+    return render_template("browse.html", header = header, data = data )  
 
     
 

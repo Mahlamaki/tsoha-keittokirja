@@ -1,8 +1,18 @@
-<h1>Reseptejä</h1>
+<h1>{{header}}</h1>
 
-{% for item in category %}
+
+<br>
+{% for item in data %}
 <tr>
+    <br>
+    <strong>
     <td>{{item[0]}}</td>
+    </strong>
+    <br>
+    
+    <td>{{item[1]}}</td>
+    <br>
+
     
 </tr>
 {% endfor %}
