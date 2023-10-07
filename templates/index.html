@@ -3,16 +3,36 @@
 <h1>WEB KEITTOKIRJA</h1>
 <p>
 <p>
+{% if session.username %}
+<p>Olet kirjautunut käyttäjänä {{ session.username }}</p>
+<a href="/Kirjaudu_ulos">Kirjaudu ulos</a>
+{% else %}
+<form action="/Kirjaudu_sisaan" method="POST">
+<p>Tunnus:<br>
+<input type="text" name="username"></p>
+<p>Salasana:<br>
+<input type="password" name="password"></p>
+<input type="submit" value="Kirjaudu">
+</form>
+{{message}}
+<p>
+<a href="/uusi_tunnus">Rekisteröidy</a>
+{% endif %}
+<p>
 <b>Tervetuloa</b>!
 <p>
 Sähköisessä keittokirjassa voit:
 <ul>
-  <li> lisätä keittokirjaan oman maukkaan reseptisi
+  <li> Kirjautuneena lisätä keittokirjaan oman maukkaan reseptisi
   <li> löytää herkullisia reseptejä 
 </ul>
 <p>
+{% if session.username %}
 <a href="/luo-uusi-resepti">Luo uusi resepti</a>
 <p>
+{% else %}
+Kirjaudu sisään luodaksesi uuden reseptin
+{% endif %}
 Valitse ruokalaji:
 <br>
 <form action="/selaa/"  method ="POST">

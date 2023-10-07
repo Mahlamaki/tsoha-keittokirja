@@ -1,0 +1,22 @@
+<h2>Luo uusi käyttäjätunnus</h2>
+
+<form action="/create_user" method="POST">
+Tunnus:
+ <p>
+<input type="text" name="username" minlength="1" maxlength="25">
+<p>
+Salasana: 
+<p>
+<input type="password" name="password1" minlength="1" maxlength="25">
+<p>
+Salasana uudestaan:
+<p>
+<input type="password" name="password2" minlength="1" maxlength="25">
+<p>
+<input type="submit" value="Luo tunnus">
+</form>
+<p>
+{{message}}
+<p>
+<a href="/">Peruuta</a>
+
