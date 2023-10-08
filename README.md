@@ -1,34 +1,25 @@
 # Web keittokirja
 
-## Toinen välipalautus
+## Kolmas välipalautus
 
-Sovellus on vielä aivan kesken. Valitettavasti en saanut tähän vielä aikaiseksi mitään toimivuutta. Tietokaintoihin yhdistämiseen opettelussa meni tuhottoman paljon aikaa
-joten itse sovelluksen kehitykseen ei minun kohdallani nyt jäänyt juuri ollenkaan aikaa. Tästä keskeneräisestä versiosta löytyy vasta:
+Sovelluksesta tulee virtuaalinen keittokirja, jossa käyttäjä pystyy selailemaan omia ja muiden tallentamia reseptejä. Reseptin pystyy luomaan ja (oman reseptin) poistamaan vain sisään kirjautunut käyttäjä, mutta reseptejä voi selailla, vaikka ei olisikaan kirjautuneena. Reseptejä pystyy järjestämään ruokalajin mukaan ja käyttäjä pystyy tallentamaan reseptejä suosikkeihinsa. Kirjautunut pystyy myös tarkastelemaan omilla sivuillaan omia reseptejään.
 
--tieto kahdesta ensimmäisestä taulusta
--kaksi html sivua (etusivu ja sivu uuden reseptin luomiseksi), mutta näiden välillä ei pysty vielä liikkumaan. 
+Kaikkia toimintoja en ole ehtinyt vielä toteuttamaan, lisäksi sovelluksen ulkoasu ja tietoturva vaativat vielä työtä.
 
-Sain nyt tietokannat toimimaan, mutta en valitettavasi niitä tähän palautukseen ole vielä saanut hyödynnettyä. Olen kuitenkin luonut tietokantaan taulut recipe ja category. 
-
-Tähän päättyy välipalautusta varten tehty kommentti. Alla aiemmin kirjattua sovelluksen suunnittelua.
-
-
-Keittokirjaprojekti on vielä täysin keskeneräinen. Toistaiseksi löydät tästä alta vain tulevan web-keittokirjan mahdollisia tulevia keskeisimpiä toimintoja. Web keittokirjalla ei ole vielä nimeä.
+Keittokirjaprojekti on vielä  keskeneräinen. Alla listausta toiminnoista, jotka on jo toteutettu ja joitka odottavat vielä toteutusta:
 
 ### Keskeisimpiä toimintoja
 
 Käyttäjät pystyvät muunmuassa:
 
-- luomaan käyttäjätunnuksen ja salasanan
-- luoda reseptejä
-- kommentoida omia ja toisten reseptejä
-- poistaa itse tehdyn reseptin tai itse tehdyn kommentin
-- tallentaa resepti omiin "suosikkeihin"
-- voi nähdä muiden tekemät reseptit
-- nähdä lajiteltuja reseptejä (lajiteltu esim. pääruokiin, alkupaloihin ja jälkiruokiin) tästä omat näppäimet sivuston yläreunassa.
+- ~~luomaan käyttäjätunnuksen ja salasanan~~
+- ~~luoda reseptejä~~
+- poistaa itse tehdyn reseptin
+- tallentaa resepti omiin "suosikkeihin" ja poistaa sen suosikeista
+- ~~voi selata muiden tekemiä reseptejä~~
+- ~~nähdä lajiteltuja reseptejä (lajiteltu esim. pääruokiin, alkupaloihin ja jälkiruokiin)~~
 
-Keittokirjaan voi lisätä myös mahdollisia muita toimintoja; harkinnassa muun muassa reseptien arvostelu, reseptien lisäyspäivän ja 
-kommenttejen lähetysaikojen päivämäärien ja kellonaikojen näyttäminen jne.
+Keittokirjaan voi lisätä myös mahdollisia muita toimintoja; harkinnassa muun muassa reseptien lisäyspäivän ja 
 
 
 ## Käynnistysohjeet
@@ -58,7 +49,7 @@ pip install python-dotenv
 ```
 
 Määritä skeema tietokannalle:
-HUOM! Jos sinulla on tietokannassasi saman nimisiä tauluja (recipe, category), sinun kannattaa luoda tätä varten toinen tietokanta. Tähän ohjeet löytyy kurssimateriaalista.
+HUOM! Jos sinulla on tietokannassasi saman nimisiä tauluja (recipe, category, favourites, users), sinun kannattaa luoda tätä varten toinen tietokanta. Tähän ohjeet löytyy kurssimateriaalista.
 
 ```
 psql < schema.sql
