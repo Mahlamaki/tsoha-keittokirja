@@ -1,8 +1,9 @@
-<h1>{{header}}</h1>
+<h1>Omat reseptit</h1>
 <p>
 <p>
 <p>
 <a href="/">Takaisin etusivulle</a>
+<p>
 <p>
 <br>
 {% for item in data %}
@@ -12,10 +13,12 @@
     <td>{{item[0]}}</td>
     </strong>
     <br>
-    
+
     <td>{{item[1]}}</td>
     <br>
 
-    
+
 </tr>
 {% endfor %}
+
+

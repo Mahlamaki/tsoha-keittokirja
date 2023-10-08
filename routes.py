@@ -22,6 +22,7 @@ def login():
     else:
         hash_value = user.password
     if check_password_hash(hash_value, password):
+        session["user_id"] = user[0]
         session["username"] = username
     else:
         return render_template("index.html", message = message)
@@ -66,7 +67,8 @@ def send():
     name = request.form["title"]
     recipe =request.form["message"]
     category = request.form["category"]
-    sql = f"INSERT INTO recipe (category_id, name, content) VALUES ('{category}','{name}', '{recipe}')"
+    user_id = session["user_id"]
+    sql = f"INSERT INTO recipe (category_id, name, content, user_id) VALUES ('{category}','{name}', '{recipe}', '{user_id}')"
     db.session.execute(text(sql))
     db.session.commit()
     return render_template("move.html")
@@ -76,18 +78,27 @@ def browse():
     category = request.form.get("category")
     
     if category != "4":
-    	sql = f"SELECT recipe.name, recipe.content, category.name  FROM recipe, category WHERE category.id =recipe.category_id AND category.id = {category}";
+    	sql = f"SELECT recipe.name, recipe.content  FROM recipe, category WHERE category.id =recipe.category_id AND category.id = {category}";
+    	sql1 = f"SELECT category.name FROM category WHERE category.id = {category}";
     	data = db.session.execute(text(sql))
-    	row = data.fetchone()
-    	header= row[2]
+    	data1=db.session.execute(text(sql1))
+    	row = data1.fetchone()
+    	header= row[0]
     else:
     	sql = f"SELECT recipe.name, recipe.content FROM recipe";
     	data = db.session.execute(text(sql))
     	header ="Kaikki reseptit"
+    
     	
    
     return render_template("browse.html", header = header, data = data )  
 
+@app.route("/omat_sivut")
+def move():
+    user_id = session["user_id"]
+    sql = f"SELECT recipe.name, recipe.content FROM recipe WHERE recipe.user_id = {user_id}";
+    data = db.session.execute(text(sql))
+    return render_template("userpage.html", data = data)
     
 
 
