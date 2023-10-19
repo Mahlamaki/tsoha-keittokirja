@@ -1,0 +1,22 @@
+<h1>{{header}}</h1>
+<p>
+<p>
+<p>
+<a href="/">Takaisin etusivulle</a>
+<p>
+<br>
+{{message}}
+{% for recipe in data %}
+<tr>
+    <br>
+    <strong>
+    <td>{{recipe.name}}</td>
+    </strong>
+    <a href="/recipe/{{ recipe.id }}">Katsele</a>
+    <br>
+    <br>
+
+
+</tr>
+{% endfor %}
+

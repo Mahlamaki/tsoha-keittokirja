@@ -1,0 +1,22 @@
+<p>
+<p>
+<strong>{{name}}</strong>
+<p>
+{{content}}
+<br>
+<p>
+{% if not  in_favourites%}
+<form action="/favourites/{{recipe_id}}" method="POST">
+
+<input type="submit" value="Lisää suosikkeihin">
+{%endif%}
+{%if in_favourites%}
+<form action="/favourites/{{recipe_id}}" method="POST">
+
+<input type="submit" value="Poista suosikeista">
+
+{%endif%}
+
+<a href="/">Takaisin etusivulle</a>
+</form>
+
