@@ -20,7 +20,7 @@ Käyttäjät pystyvät muunmuassa:
 - ~~nähdä lajiteltuja reseptejä (lajiteltu esim. pääruokiin, alkupaloihin ja jälkiruokiin)~~
 - reseptille voi antaa tykkäyksen
 - reseptejä selaillessa näkee sen tykkäyksien määrän
--~~ pitää vielä laittaa rajoitukset inputteihin~~
+- ~~pitää vielä laittaa rajoitukset inputteihin~~
 - varmistaa, että kaikista tulee tarvittavat errorviestit
 - käyttäjä voi poistaa oman tunnuksensa
 - käyttäjä voi muuttaa salasanaansa
