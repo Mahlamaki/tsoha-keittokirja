@@ -5,7 +5,7 @@
 <p>
 {% if session.username %}
 <p>Olet kirjautunut käyttäjänä {{ session.username }}</p>
-<a href="/omat_sivut">Omat reseptit</a>&nbsp;&nbsp;&nbsp; <a href="/Kirjaudu_ulos">Kirjaudu ulos</a>
+<a href="/omat_sivut">Omat reseptit</a>&nbsp;&nbsp;&nbsp; <a href="/Kirjaudu_ulos">Kirjaudu ulos</a>&nbsp;&nbsp;&nbsp; <a href="/suosikit">Suosikit</a> 
 {% else %}
 <form action="/Kirjaudu_sisaan" method="POST">
 <p>Tunnus:<br>
