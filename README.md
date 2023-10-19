@@ -6,7 +6,7 @@ Sovelluksesta tulee virtuaalinen keittokirja, jossa käyttäjä pystyy selailema
 
 Kaikkia toimintoja en ole ehtinyt vielä toteuttamaan, lisäksi sovelluksen ulkoasu ja tietoturva vaativat vielä työtä.
 
-Keittokirjaprojekti on vielä  keskeneräinen. Alla listausta toiminnoista, jotka on jo toteutettu ja joitka odottavat vielä toteutusta:
+Keittokirjaprojekti on vielä  keskeneräinen. Alla listausta toiminnoista, jotka on jo toteutettu (yliviivatut) ja joitka odottavat vielä toteutusta:
 
 ### Keskeisimpiä toimintoja
 
@@ -14,12 +14,18 @@ Käyttäjät pystyvät muunmuassa:
 
 - ~~luomaan käyttäjätunnuksen ja salasanan~~
 - ~~luoda reseptejä~~
-- poistaa itse tehdyn reseptin
-- tallentaa resepti omiin "suosikkeihin" ja poistaa sen suosikeista
+- ~~poistaa itse tehdyn reseptin~~
+- ~~tallentaa resepti omiin "suosikkeihin" ja poistaa sen suosikeista~~
 - ~~voi selata muiden tekemiä reseptejä~~
 - ~~nähdä lajiteltuja reseptejä (lajiteltu esim. pääruokiin, alkupaloihin ja jälkiruokiin)~~
+- reseptille voi antaa tykkäyksen
+- reseptejä selaillessa näkee sen tykkäyksien määrän
+- pitää vielä laittaa rajoitukset inputteihin
+- varmistaa, että kaikista tulee tarvittavat errorviestit
+- käyttäjä voi poistaa oman tunnuksensa
+- käyttäjä voi muuttaa salasanaansa
 
-Keittokirjaan voi lisätä myös mahdollisia muita toimintoja; harkinnassa muun muassa reseptien lisäyspäivän ja 
+
 
 
 ## Käynnistysohjeet
