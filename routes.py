@@ -142,7 +142,14 @@ def open_recipe(recipe_id):
 
     return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites) 
     
+@app.route("/my_recipe/<int:recipe_id>", methods=["GET"])
+def open_my_recipe(recipe_id):
+    recipe = recipes.get_recipe(recipe_id)
+    user_id = session["user_id"]
+    recipe_id = recipe_id
 
+    return render_template("my_recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id) 
+    
 
 
 

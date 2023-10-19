@@ -4,20 +4,22 @@
 <p>
 <a href="/">Takaisin etusivulle</a>
 <p>
-<p>
 <br>
-{% for item in data %}
-<form action="/delete_recipe/{{item[2]}}" method="POST">
+{{message}}
+{% for recipe in data %}
+<tr>
+    <br>
+    <strong>
+    <td>{{recipe.name}}</td>
+    </strong>
+    <a href="/my_recipe/{{ recipe.id }}">Katsele</a>
+    <br>
+    <br>
 
-<input type="radio" name="recipe" value=item[2]> {{item[0]}} <br>
-<br>
 
- {{item[1]}}</td>
-<br>
-
+</tr>
 {% endfor %}
-<br>
-<input type="submit" value="Poista">
 
-</form>
+
+
 
