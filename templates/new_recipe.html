@@ -6,11 +6,14 @@ Mitä ruokalajia: <select name="category">
 <option value="3"> jälkiruoka
 </select>
 <p>
-Kirjoita resepti (max. 1000 merkkiä): <br>
-<textarea name="message" rows="20" cols="70" minlength="1" maxlength = "1000">
+Kirjoita resepti (max. 5000 merkkiä): <br>
+<textarea name="message" rows="20" cols="70" minlength="1" maxlength = "5000">
+Ainekset:
+
+Ohjeet:
 </textarea> <br>
 <input type="submit" value="Tallenna">
 <p>
 <a href="/">Takaisin etusivulle</a>
 </form>
-
+{{message}}

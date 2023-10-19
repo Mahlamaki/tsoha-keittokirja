@@ -4,7 +4,6 @@ from flask import redirect, render_template, request, session
 from db import db
 import users
 import recipes
-
 from werkzeug.security import check_password_hash, generate_password_hash
  
 @app.route("/")
@@ -15,8 +14,7 @@ def index():
 @app.route("/Kirjaudu_sisaan",methods=["POST"])
 def login():
     username = request.form["username"]
-    password = request.form["password"]
-        
+    password = request.form["password"]    
     if not users.login(username, password):
     	message = "Väärä käyttäjätunnus tai salasana"
     	return render_template("index.html", message = message)
@@ -56,10 +54,10 @@ def create_user():
     return redirect("/")    	
     
     
-    
 @app.route("/luo-uusi-resepti")
 def new_recipe():
     return render_template("new_recipe.html")
+
 
 @app.route("/send", methods=["POST"])
 def send():
@@ -67,18 +65,18 @@ def send():
     recipe =request.form["message"]
     category = request.form["category"]
     user_id = session["user_id"]
-    sql = f"INSERT INTO recipe (category_id, name, content, user_id) VALUES ('{category}','{name}', '{recipe}', '{user_id}')"
-    db.session.execute(text(sql))
-    db.session.commit()
-    return render_template("move.html", message = "Reseptin luonti onnistui!")
+    if len(name) < 1 or len(name) > 30:
+    	return render_template("new_recipe.html", message = "Reseptin nimessä pitää olla 1-30 merkkiä")
+    if len(recipe) < 1 or len(recipe) > 5000:
+    	return render_template("new_recipe.html", message = "Reseptin pituuden tulee olla 1-5000 merkkiä")
+    recipes.add_recipe(category,name,recipe,user_id)
+    return render_template("move.html", message = "Reseptin luonti onnistui!", name = len(name), recipe=len(recipe))
 
     
 @app.route("/selaa/", methods=["GET","POST"])
 def browse():
     category = request.form.get("category")
-    user_id = session["user_id"]
-    
-    
+    user_id = session["user_id"]       
     if category != "4":
     	sql = f"SELECT recipe.id, recipe.name, recipe.content  FROM recipe, category WHERE category.id =recipe.category_id AND category.id = {category}";
     	sql1 = f"SELECT category.name FROM category WHERE category.id = {category}";
@@ -91,9 +89,8 @@ def browse():
     	data = db.session.execute(text(sql))
     	header ="Kaikki reseptit"
     
-    	
-   
     return render_template("browse.html", header = header, data = data )  
+ 
  
 @app.route("/favourites/<int:recipe_id>", methods=["GET","POST"])
 
@@ -108,8 +105,8 @@ def favourites(recipe_id):
     else:
     	recipes.delete_from_favourites(recipe.id,user_id)
     	in_favourites = False
-
     return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites)    
+    
     
 @app.route("/suosikit", methods=["GET","POST"])
 def browse_favourites():
@@ -118,12 +115,14 @@ def browse_favourites():
     header = "Suosikit"
     return render_template("favourites.html", header = header, data = data ) 
 
+
 @app.route("/omat_sivut", methods=["GET","POST"])
 def move():
     user_id = session["user_id"]
     sql = f"SELECT recipe.name, recipe.content, id FROM recipe WHERE recipe.user_id = {user_id}";
     data = db.session.execute(text(sql))
     return render_template("userpage.html", data = data)
+    
     
 @app.route("/delete_recipe/<int:recipe_id>", methods=["GET","POST"])   
 def delete(recipe_id):
@@ -132,15 +131,14 @@ def delete(recipe_id):
     return render_template("move_delete.html", message = "Reseptin poisto onnistui!")
     
 
-
 @app.route("/recipe/<int:recipe_id>", methods=["GET"])
 def open_recipe(recipe_id):
     recipe = recipes.get_recipe(recipe_id)
     user_id = session["user_id"]
     recipe_id = recipe_id
     in_favourites = recipes.check_if_in_favourites(recipe.id, user_id)
-
     return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites) 
+    
     
 @app.route("/my_recipe/<int:recipe_id>", methods=["GET"])
 def open_my_recipe(recipe_id):
