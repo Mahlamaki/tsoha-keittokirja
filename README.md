@@ -18,8 +18,8 @@ Käyttäjät pystyvät muunmuassa:
 - ~~tallentaa resepti omiin "suosikkeihin" ja poistaa sen suosikeista~~
 - ~~voi selata muiden tekemiä reseptejä~~
 - ~~nähdä lajiteltuja reseptejä (lajiteltu esim. pääruokiin, alkupaloihin ja jälkiruokiin)~~
-- reseptille voi antaa tykkäyksen
-- reseptejä selaillessa näkee sen tykkäyksien määrän
+- ~~reseptille voi antaa tykkäyksen~~
+- ~~reseptejä selaillessa näkee sen tykkäyksien määrän~~
 - ~~pitää vielä laittaa rajoitukset inputteihin~~
 - varmistaa, että kaikista tulee tarvittavat errorviestit
 - käyttäjä voi poistaa oman tunnuksensa
