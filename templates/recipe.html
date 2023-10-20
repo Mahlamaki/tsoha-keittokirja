@@ -16,7 +16,19 @@
 <input type="submit" value="Poista suosikeista">
 
 {%endif%}
+</form>
+{% if not liked%}
+<form action="/like/{{recipe_id}}" method="POST">
 
+<input type="submit" value="Tykkää">
+{%endif%}
+{%if liked%}
+<form action="/like/{{recipe_id}}" method="POST">
+
+<input type="submit" value="En tykkääkään">
+
+{%endif%}
+Tykkäykset: {{likes}}
+<p>
 <a href="/">Takaisin etusivulle</a>
 </form>
-
