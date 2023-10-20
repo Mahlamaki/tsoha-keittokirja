@@ -21,7 +21,7 @@ Käyttäjät pystyvät muunmuassa:
 - ~~reseptille voi antaa tykkäyksen~~
 - ~~reseptejä selaillessa näkee sen tykkäyksien määrän~~
 - ~~pitää vielä laittaa rajoitukset inputteihin~~
-- varmistaa, että kaikista tulee tarvittavat errorviestit
+- ~~varmistaa, että kaikista tulee tarvittavat errorviestit~~
 - käyttäjä voi poistaa oman tunnuksensa
 - käyttäjä voi muuttaa salasanaansa
 
