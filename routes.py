@@ -6,7 +6,7 @@ import users
 import recipes
 import favourites
 import likes
-from werkzeug.security import check_password_hash, generate_password_hash
+
  
 @app.route("/")
 def index():
@@ -19,8 +19,7 @@ def login():
     password = request.form["password"]    
     if not users.login(username, password):
     	message = "Väärä käyttäjätunnus tai salasana"
-    	return render_template("index.html", message = message)
-        
+    	return render_template("index.html", message = message)        
     return redirect("/")
     
 
@@ -29,7 +28,7 @@ def logout():
     users.logout()
     return redirect("/")
     
-
+    
 @app.route("/register")
 def new_user():
     return render_template("register.html")
@@ -83,15 +82,11 @@ def browse():
     category = request.form.get("category")
     user_id = session["user_id"]       
     if category != "4":
-    	sql = f"SELECT recipe.id, recipe.name, recipe.content  FROM recipe, category WHERE category.id =recipe.category_id AND category.id = {category}";
-    	sql1 = f"SELECT category.name FROM category WHERE category.id = {category}";
-    	data = db.session.execute(text(sql))
-    	data1=db.session.execute(text(sql1))
-    	row = data1.fetchone()
-    	header= row[0]
+    	data = recipes.get_by_category(category)
+    	category_name = recipes.get_category(category)
+    	header= category_name[0]
     else:
-    	sql = f"SELECT recipe.id, recipe.name, recipe.content FROM recipe";
-    	data = db.session.execute(text(sql))
+    	data = recipes.all_recipes()
     	header ="Kaikki reseptit"
     
     return render_template("browse.html", header = header, data = data )  
@@ -127,12 +122,11 @@ def browse_favourites():
 @app.route("/my_page", methods=["GET","POST"])
 def move():
     user_id = session["user_id"]
-    sql = f"SELECT recipe.name, recipe.content, id FROM recipe WHERE recipe.user_id = {user_id}";
-    data = db.session.execute(text(sql))
+    data = recipes.get_my_recipes(user_id)
     return render_template("userpage.html", data = data)
     
     
-@app.route("/delete_recipe/<int:recipe_id>", methods=["GET","POST"])   
+@app.route("/delete_recipe/<int:recipe_id>", methods=["POST"])   
 def delete(recipe_id):
     user_id = session["user_id"]
     recipes.delete_recipe(recipe_id)
