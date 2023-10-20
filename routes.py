@@ -4,6 +4,8 @@ from flask import redirect, render_template, request, session
 from db import db
 import users
 import recipes
+import favourites
+import likes
 from werkzeug.security import check_password_hash, generate_password_hash
  
 @app.route("/")
@@ -94,24 +96,27 @@ def browse():
  
 @app.route("/favourites/<int:recipe_id>", methods=["GET","POST"])
 
-def favourites(recipe_id):
+def favourites_actions(recipe_id):
     recipe = recipes.get_recipe(recipe_id)
     user_id = session["user_id"]
-    in_favourites = recipes.check_if_in_favourites(recipe.id, user_id)
+    in_favourites = favourites.check_if_in_favourites(recipe.id, user_id)
     
     if in_favourites == False:
-    	recipes.add_to_favourites(recipe.id, user_id)
+    	favourites.add_to_favourites(recipe.id, user_id)
     	in_favourites = True
     else:
-    	recipes.delete_from_favourites(recipe.id,user_id)
+    	favourites.delete_from_favourites(recipe.id,user_id)
     	in_favourites = False
-    return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites)    
+
+    liked= likes.check_if_liked(recipe_id, user_id)
+    like_count = likes.count_likes(recipe_id)
+    return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites, liked=liked[0], likes = like_count[0]) 
     
     
 @app.route("/suosikit", methods=["GET","POST"])
 def browse_favourites():
     user_id = session["user_id"]
-    data = recipes.get_favourites(user_id)
+    data = favourites.get_favourites(user_id)
     header = "Suosikit"
     return render_template("favourites.html", header = header, data = data ) 
 
@@ -136,8 +141,10 @@ def open_recipe(recipe_id):
     recipe = recipes.get_recipe(recipe_id)
     user_id = session["user_id"]
     recipe_id = recipe_id
-    in_favourites = recipes.check_if_in_favourites(recipe.id, user_id)
-    return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites) 
+    in_favourites = favourites.check_if_in_favourites(recipe_id, user_id)
+    liked= likes.check_if_liked(recipe_id, user_id)
+    like_count = likes.count_likes(recipe_id)
+    return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites, liked=liked[0], likes = like_count[0]) 
     
     
 @app.route("/my_recipe/<int:recipe_id>", methods=["GET"])
@@ -145,13 +152,26 @@ def open_my_recipe(recipe_id):
     recipe = recipes.get_recipe(recipe_id)
     user_id = session["user_id"]
     recipe_id = recipe_id
-
-    return render_template("my_recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id) 
+    like_count = likes.count_likes(recipe_id)
+    return render_template("my_recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, likes = like_count[0]) 
     
-
-
-
+@app.route("/like/<int:recipe_id>", methods=["GET","POST"])
+def like_function(recipe_id):
+    recipe = recipes.get_recipe(recipe_id)
+    user_id = session["user_id"]
+    liked= likes.check_if_liked(recipe_id, user_id)    
     
+    if liked[0] == False:
+        likes.add_like(recipe_id, user_id)
+       
+    if liked[0] == True:
+        likes.delete_like(recipe_id, user_id)
+        
+    in_favourites = favourites.check_if_in_favourites(recipe.id, user_id)
+    liked= likes.check_if_liked(recipe_id, user_id)
+    like_count = likes.count_likes(recipe_id)
+    return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites, liked=liked[0], likes = like_count[0]) 
+
 
     
 
