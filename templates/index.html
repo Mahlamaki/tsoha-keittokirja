@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <title>Etusivu</title>
 <h1>WEB KEITTOKIRJA</h1>
-<p>
-<p>
+<br>
+<b>Tervetuloa</b>!
+
+<br>
 {% if session.username %}
-<p>Olet kirjautunut käyttäjänä {{ session.username }}</p>
-<a href="/omat_sivut">Omat reseptit</a>&nbsp;&nbsp;&nbsp; <a href="/Kirjaudu_ulos">Kirjaudu ulos</a>&nbsp;&nbsp;&nbsp; <a href="/suosikit">Suosikit</a> 
+<br>Olet kirjautunut käyttäjänä {{ session.username }}</p>
+<a href="/my_page">Omat reseptit</a>&nbsp;&nbsp;&nbsp; <a href="/favourite_recipes">Suosikit</a>&nbsp;&nbsp;&nbsp;
+<a href="/create_new_recipe">Luo uusi resepti</a>&nbsp;&nbsp;&nbsp; <a href="/logout">Kirjaudu ulos</a>
+ 
 {% else %}
-<form action="/Kirjaudu_sisaan" method="POST">
-<p>Tunnus:<br>
-<input type="text" name="username"></p>
-<p>Salasana:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
-</form>
-{{message}}
 <p>
-<a href="/uusi_tunnus">Rekisteröidy</a>
+<form action="/login" method="POST">
+<p>Tunnus:<br>
+<input type="text" name="username" maxlength="25"></p>
+<p>Salasana:<br>
+<input type="password" name="password" maxlength="25"></p>
+<input type="submit" value="Kirjaudu">
+{{message}}
+</form>
+<p>
+<a href="/register">Rekisteröidy</a>
 {% endif %}
 <p>
-<b>Tervetuloa</b>!
+
 <p>
-Sähköisessä keittokirjassa voit:
+Web keittokirjassa voit:
 <ul>
-  <li> Kirjautuneena lisätä keittokirjaan oman maukkaan reseptisi
-  <li> löytää herkullisia reseptejä 
+  <li> Selailla muiden laatimia reseptejä ruokalajeittain
+  <li> Luoda omia reseptejä
+  <li> Tykkäillä muiden resepteistä
+  <li> Lisätä reseptejä suosikkeihisi
 </ul>
 <p>
-{% if session.username %}
-<a href="/luo-uusi-resepti">Luo uusi resepti</a>
-<p>
-{% else %}
-Kirjaudu sisään luodaksesi uuden reseptin
-{% endif %}
-Valitse ruokalaji:
 <br>
-<form action="/selaa/"  method ="POST">
+<br>
+{% if session.username %}
+Valitse ruokalaji, jonka reseptejä haluat selailla:
+<br>
+<form action="/browse_recipes/"  method ="POST">
 <select  name="category" method="POST">
 <option value="1" selected> Aamupala
 <option value="2"> Pääruoka
@@ -44,3 +48,4 @@ Valitse ruokalaji:
 </select>
 <button type="submit">Valitse</button>
 </form>
+{% endif %}

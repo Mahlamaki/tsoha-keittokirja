@@ -13,7 +13,7 @@ def index():
     return render_template("index.html") 
     
     
-@app.route("/Kirjaudu_sisaan",methods=["POST"])
+@app.route("/login",methods=["POST"])
 def login():
     username = request.form["username"]
     password = request.form["password"]    
@@ -24,13 +24,13 @@ def login():
     return redirect("/")
     
 
-@app.route("/Kirjaudu_ulos")
+@app.route("/logout")
 def logout():
     users.logout()
     return redirect("/")
     
 
-@app.route("/uusi_tunnus")
+@app.route("/register")
 def new_user():
     return render_template("register.html")
  
@@ -41,14 +41,17 @@ def create_user():
     password1 = request.form["password1"]
     password2 = request.form["password2"]
     if len(username) < 1 or len(username) > 25:
-        message = "Käyttäjänimen on oltava vähintään 1 ja maksimissaan 25 merkkiä pitkä"
+        message = "Käyttäjänimen on oltava vähintään 1-25 merkkiä pitkä"
         return render_template("register.html", message = message)   	
     if  password1 != password2:
         message = "Salasanat eivät täsmää"
         return render_template("register.html", message = message)
     if  password1 == "":
         message = "Sinun on luotava salasana"
-        return render_template("register.html", message = message)    
+        return render_template("register.html", message = message) 
+    if  len(password1) > 25:
+        message = "Salasanan tulee olla 1-25 merkkiä pitkä"
+        return render_template("register.html", message = message)          
 
     if not users.create_user(username, password1):
         message = "Rekistetöinti ei onnistunut. Käyttäjänimi on jo käytössä."
@@ -56,7 +59,7 @@ def create_user():
     return redirect("/")    	
     
     
-@app.route("/luo-uusi-resepti")
+@app.route("/create_new_recipe")
 def new_recipe():
     return render_template("new_recipe.html")
 
@@ -69,13 +72,13 @@ def send():
     user_id = session["user_id"]
     if len(name) < 1 or len(name) > 30:
     	return render_template("new_recipe.html", message = "Reseptin nimessä pitää olla 1-30 merkkiä")
-    if len(recipe) < 1 or len(recipe) > 5000:
+    if len(recipe) < 1 or len(recipe) > 2000:
     	return render_template("new_recipe.html", message = "Reseptin pituuden tulee olla 1-5000 merkkiä")
     recipes.add_recipe(category,name,recipe,user_id)
     return render_template("move.html", message = "Reseptin luonti onnistui!", name = len(name), recipe=len(recipe))
 
     
-@app.route("/selaa/", methods=["GET","POST"])
+@app.route("/browse_recipes/", methods=["GET","POST"])
 def browse():
     category = request.form.get("category")
     user_id = session["user_id"]       
@@ -113,7 +116,7 @@ def favourites_actions(recipe_id):
     return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites, liked=liked[0], likes = like_count[0]) 
     
     
-@app.route("/suosikit", methods=["GET","POST"])
+@app.route("/favourite_recipes", methods=["GET","POST"])
 def browse_favourites():
     user_id = session["user_id"]
     data = favourites.get_favourites(user_id)
@@ -121,7 +124,7 @@ def browse_favourites():
     return render_template("favourites.html", header = header, data = data ) 
 
 
-@app.route("/omat_sivut", methods=["GET","POST"])
+@app.route("/my_page", methods=["GET","POST"])
 def move():
     user_id = session["user_id"]
     sql = f"SELECT recipe.name, recipe.content, id FROM recipe WHERE recipe.user_id = {user_id}";
