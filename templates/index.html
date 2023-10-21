@@ -1,51 +1,75 @@
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <title>Etusivu</title>
-<h1>WEB KEITTOKIRJA</h1>
-<br>
-<b>Tervetuloa</b>!
-
-<br>
-{% if session.username %}
-<br>Olet kirjautunut käyttäjänä {{ session.username }}</p>
-<a href="/my_page">Omat reseptit</a>&nbsp;&nbsp;&nbsp; <a href="/favourite_recipes">Suosikit</a>&nbsp;&nbsp;&nbsp;
-<a href="/create_new_recipe">Luo uusi resepti</a>&nbsp;&nbsp;&nbsp; <a href="/logout">Kirjaudu ulos</a>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+	<br>
+	<br>
+        <h1>WEB KEITTOKIRJA</h1>
+	<p>
+	<b>Tervetuloa</b>!
+        <br>
+        <br>
+	<br>
+        <br>
+	  Web keittokirjassa voit:
+	  <ul>
+ 	   <li> Selailla muiden laatimia reseptejä ruokalajeittain
+ 	   <li> Luoda omia reseptejä
+ 	   <li> Tykkäillä muiden resepteistä
+ 	   <li> Lisätä reseptejä suosikkeihisi
+	 </ul>
+    </div>	
+    <div class="col-4">
+    {% if session.username %}
+      <br>
+      <br>
+      <h5>Olet kirjautunut käyttäjänä {{ session.username }}</h5>
+      <br>
+      <br>
+      <a class="navbar-brand" href="/my_page">Omat reseptit</a>
+      <br>
+      <a class="navbar-brand" href="/favourite_recipes">Suosikit</a>
+      <br>
+      <a class="navbar-brand" href="/create_new_recipe">Luo uusi resepti</a>
+      <br>
+      <a class="navbar-brand"  href="/logout">Kirjaudu ulos</a>
+      <br>
+      <br>
+      Valitse ruokalaji, jonka reseptejä haluat selailla:
+      <p>
+      <form action="/browse_recipes/"  method ="POST">      
+      <select class="custom-select custom-select-lg mb-3" name="category" method="POST">
+      <option value="1" selected> Aamupala
+      <option value="2"> Pääruoka
+      <option value="3"> Jälkiruoka
+      <option value="4"> Kaikki
+      </select>
+      <button class="btn btn-primary" type="submit">Valitse</button>
+      </form>
  
-{% else %}
-<p>
-<form action="/login" method="POST">
-<p>Tunnus:<br>
-<input type="text" name="username" maxlength="25"></p>
-<p>Salasana:<br>
-<input type="password" name="password" maxlength="25"></p>
-<input type="submit" value="Kirjaudu">
-{{message}}
-</form>
-<p>
-<a href="/register">Rekisteröidy</a>
-{% endif %}
-<p>
+    {% else %}
+      <br>
+      <br>
+      <h6>Kirjaudu sisään</h6>
+      <br>
+      <br>
+      <form action="/login" method="POST">
+      <p>Tunnus:<br>
+      <input type="text" name="username" maxlength="25"></p>
+      <p>Salasana:<br>
+      <input type="password" name="password" maxlength="25"></p>
+      <br>
+      <input class="btn btn-primary" type="submit" value="Kirjaudu">
+      {{message}}
+      </form>
+      <br>
+      <a href="/register">Rekisteröidy</a>
+    {% endif %}
+    <p>
+    </div>
+  </div>
+</div>
 
-<p>
-Web keittokirjassa voit:
-<ul>
-  <li> Selailla muiden laatimia reseptejä ruokalajeittain
-  <li> Luoda omia reseptejä
-  <li> Tykkäillä muiden resepteistä
-  <li> Lisätä reseptejä suosikkeihisi
-</ul>
-<p>
-<br>
-<br>
-{% if session.username %}
-Valitse ruokalaji, jonka reseptejä haluat selailla:
-<br>
-<form action="/browse_recipes/"  method ="POST">
-<select  name="category" method="POST">
-<option value="1" selected> Aamupala
-<option value="2"> Pääruoka
-<option value="3"> Jälkiruoka
-<option value="4"> Kaikki
-</select>
-<button type="submit">Valitse</button>
-</form>
-{% endif %}
