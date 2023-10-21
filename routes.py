@@ -116,14 +116,15 @@ def browse_favourites():
     user_id = session["user_id"]
     data = favourites.get_favourites(user_id)
     header = "Suosikit"
-    return render_template("favourites.html", header = header, data = data ) 
+    return render_template("browse.html", header = header, data = data ) 
 
 
 @app.route("/my_page", methods=["GET","POST"])
 def move():
     user_id = session["user_id"]
     data = recipes.get_my_recipes(user_id)
-    return render_template("userpage.html", data = data)
+    header = "Omat reseptit"
+    return render_template("userpage.html", header = header, data = data)
     
     
 @app.route("/delete_recipe/<int:recipe_id>", methods=["POST"])   
