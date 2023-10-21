@@ -1,19 +1,43 @@
-<form action="/send" method="POST">
-Reseptin nimi (max. 30 merkkiä): <input type="text" name="title" size ="35"minlength="1" maxlength="30"> <br>
-Mitä ruokalajia: <select name="category">
-<option value="1" selected> aamiainen
-<option value="2"> pääruoka
-<option value="3"> jälkiruoka
-</select>
-<p>
-Kirjoita resepti (max. 2000 merkkiä): <br>
-<textarea name="message" rows="20" cols="70" minlength="1" maxlength = "2000">
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+	<h1>Luo uusi resepti</h1>
+	<br>
+	<br>
+        <form action="/send" method="POST">
+        Reseptin nimi (max. 30 merkkiä): <input type="text" name="title" size ="35"minlength="1" maxlength="30">
+        <br<>
+	<br>
+        Mitä ruokalajia:
+        <form action="/browse_recipes/"  method ="POST">
+        <select class="custom-select custom-select-lg mb-3" name="category">
+        <option value="1" selected> Aamupala
+        <option value="2"> Pääruoka
+        <option value="3"> Jälkiruoka
+        </select>
+        <br>
+        <br>
+        Kirjoita resepti (max. 2000 merkkiä):
+        <br>
+        <textarea name="message" rows="20" cols="70" minlength="1" maxlength = "2000">
 Ainekset:
 
-Ohjeet:
-</textarea> <br>
-<input type="submit" value="Tallenna">
-<p>
-<a href="/">Takaisin etusivulle</a>
-</form>
-{{message}}
+Ohjeet:</textarea>
+        <br>
+	<input type="submit" class="btn btn-outline-primary" value="Tallenna">
+	<br>
+	</form>
+        {{message}}
+    </div>
+    <div = class="col-4">
+      <br>       
+      <a class="btn btn-primary" href="/">Takaisin etusivulle</a>
+    </div>
+  </div>
+</div>
+
