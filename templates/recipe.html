@@ -1,34 +1,44 @@
-<p>
-<p>
-<h1>{{name}}</h1>
-<p>
-{{content}}
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <br>
-<p>
-{% if not  in_favourites%}
-<form action="/favourites/{{recipe_id}}" method="POST">
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h1>{{name}}</h1>
+        <p>
+        {% if not liked%}
+        <form action="/like/{{recipe_id}}" method="POST">
+        <input type="submit" class="btn btn-outline-success" value="Tykkää">
+        {%endif%}
+        {%if liked%}
+        <form action="/like/{{recipe_id}}" method="POST">
+        <input type="submit" class="btn btn-outline-success" value="En tykkääkään">
+        {%endif%}
+        <span class="badge badge-secondary btn-sm">Tykkäykset: {{likes}}</span>
+	</form>
+        <br>
+        <br>
+        <br>
+         {{content}}
+        <br>
+        <br>
+        {% if not  in_favourites%}
+        <form action="/favourites/{{recipe_id}}" method="POST">
+        <input type="submit" class="btn btn-outline-success" value="Lisää suosikkeihin">      
+	{%endif%}
+        {%if in_favourites%}
+        <form action="/favourites/{{recipe_id}}" method="POST">
+        <input type="submit" class="btn btn-outline-success" value="Poista suosikeista">
+        {%endif%}
+        </form>
 
-<input type="submit" value="Lisää suosikkeihin">
-{%endif%}
-{%if in_favourites%}
-<form action="/favourites/{{recipe_id}}" method="POST">
+    </div>
+    <div = class="col-4">
+       <a class="btn btn-primary" href="/">Takaisin etusivulle</a>
+    </div>
+  </div>
+</div>
 
-<input type="submit" value="Poista suosikeista">
 
-{%endif%}
-</form>
-{% if not liked%}
-<form action="/like/{{recipe_id}}" method="POST">
-
-<input type="submit" value="Tykkää">
-{%endif%}
-{%if liked%}
-<form action="/like/{{recipe_id}}" method="POST">
-
-<input type="submit" value="En tykkääkään">
-
-{%endif%}
-Tykkäykset: {{likes}}
-<p>
-<a href="/">Takaisin etusivulle</a>
-</form>

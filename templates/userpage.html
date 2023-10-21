@@ -1,24 +1,33 @@
-<h1>Omat reseptit</h1>
-<p>
-<p>
-<p>
-<a href="/">Takaisin etusivulle</a>
-<p>
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <br>
-{{message}}
-{% for recipe in data %}
-<tr>
-    <br>
-    <strong>
-    <td>{{recipe.name}}</td>
-    </strong>
-    <a href="/my_recipe/{{ recipe.id }}">Katsele</a>
-    <br>
-    <br>
-
-
-</tr>
-{% endfor %}
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h1>{{header}}</h1>
+        <br>
+        <br>
+        <br>
+        {{message}}
+        {% for recipe in data %}
+        <tr>
+            <br>
+            <strong>
+            <td>{{recipe.name}}</td>
+            </strong>
+            <a class="btn btn-outline-secondary btm-sm" href="/my_recipe/{{ recipe.id }}">Katsele</a>
+            <br>
+            <br>
+         </tr>
+         {% endfor %}
+    </div>
+    <div = class="col-4">
+       <a class="btn btn-primary" href="/">Takaisin etusivulle</a>
+    </div>
+  </div>
+</div>
 
 
 
