@@ -40,21 +40,17 @@ def create_user():
     password1 = request.form["password1"]
     password2 = request.form["password2"]
     if len(username) < 1 or len(username) > 25:
-        message = "Käyttäjänimen on oltava vähintään 1-25 merkkiä pitkä"
-        return render_template("register.html", message = message)   	
+        return render_template("register.html", message = "Käyttäjänimen on oltava vähintään 1-25 merkkiä pitkä")   	
     if  password1 != password2:
-        message = "Salasanat eivät täsmää"
-        return render_template("register.html", message = message)
+        return render_template("register.html", message = "Salasanat eivät täsmää")
     if  password1 == "":
-        message = "Sinun on luotava salasana"
-        return render_template("register.html", message = message) 
+        return render_template("register.html", message = "Sinun on luotava salasana") 
     if  len(password1) > 25:
-        message = "Salasanan tulee olla 1-25 merkkiä pitkä"
-        return render_template("register.html", message = message)          
-
+        return render_template("register.html", message = "Salasanan tulee olla 1-25 merkkiä pitkä")          
+    if users.check_if_user_exists(username)[0]:
+        return render_template("register.html", message = "Rekistetöinti ei onnistunut. Käyttäjänimi on jo käytössä.")        
     if not users.create_user(username, password1):
-        message = "Rekistetöinti ei onnistunut. Käyttäjänimi on jo käytössä."
-        return render_template("register.html", message=message)
+        return render_template("register.html", message = "Rekistetöinti ei onnistunut. Käyttäjänimi on jo käytössä.")
     return redirect("/")    	
     
     

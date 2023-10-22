@@ -24,5 +24,6 @@ def delete_from_favourites(recipe_id,user_id):
     db.session.commit()
     
 def get_favourites(user_id):
-    sql = f"SELECT recipe.name, recipe.content, recipe.id FROM recipe WHERE recipe.id IN (SELECT recipe_id FROM favourites WHERE user_id = {user_id}) ORDER BY recipe.name"   
+    sql = f"SELECT recipe.name, recipe.content, recipe.id FROM recipe \
+    WHERE recipe.id IN (SELECT recipe_id FROM favourites WHERE user_id = {user_id}) ORDER BY recipe.name"   
     return db.session.execute(text(sql))

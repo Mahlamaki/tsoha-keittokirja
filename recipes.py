@@ -20,7 +20,7 @@ def get_recipe(recipe_id):
     return db.session.execute(text(sql)).fetchone()
     
 def get_by_category(category):
-    sql = f"SELECT recipe.id, recipe.name, recipe.content  FROM recipe, category WHERE category.id =recipe.category_id AND category.id = {category}";
+    sql = f"SELECT recipe.id, recipe.name, recipe.content  FROM recipe, category WHERE category.id =recipe.category_id AND category.id = {category} ORDER BY recipe.name";
     return db.session.execute(text(sql))
 
 def get_category(category):
@@ -28,9 +28,9 @@ def get_category(category):
     return db.session.execute(text(sql)).fetchone()
     
 def all_recipes():
-    sql = f"SELECT recipe.id, recipe.name, recipe.content FROM recipe";
+    sql = f"SELECT recipe.id, recipe.name, recipe.content FROM recipe ORDER BY recipe.name";
     return db.session.execute(text(sql))
     
 def get_my_recipes(user_id):
-    sql = f"SELECT recipe.name, recipe.content, id FROM recipe WHERE recipe.user_id = {user_id}";
+    sql = f"SELECT recipe.name, recipe.content, id FROM recipe WHERE recipe.user_id = {user_id} ORDER BY recipe.name";
     return db.session.execute(text(sql))   
