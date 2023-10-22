@@ -68,7 +68,7 @@ def send():
     if len(name) < 1 or len(name) > 30:
     	return render_template("new_recipe.html", message = "Reseptin nimessä pitää olla 1-30 merkkiä")
     if len(recipe) < 1 or len(recipe) > 2000:
-    	return render_template("new_recipe.html", message = "Reseptin pituuden tulee olla 1-5000 merkkiä")
+    	return render_template("new_recipe.html", message = "Reseptin pituuden tulee olla 1-2000 merkkiä")
     recipes.add_recipe(category,name,recipe,user_id)
     return render_template("move.html", message = "Reseptin luonti onnistui!", name = len(name), recipe=len(recipe))
 
@@ -83,8 +83,7 @@ def browse():
     	header= category_name[0]
     else:
     	data = recipes.all_recipes()
-    	header ="Kaikki reseptit"
-    
+    	header ="Kaikki reseptit" 
     return render_template("browse.html", header = header, data = data )  
  
  
@@ -93,15 +92,13 @@ def browse():
 def favourites_actions(recipe_id):
     recipe = recipes.get_recipe(recipe_id)
     user_id = session["user_id"]
-    in_favourites = favourites.check_if_in_favourites(recipe.id, user_id)
-    
+    in_favourites = favourites.check_if_in_favourites(recipe.id, user_id) 
     if in_favourites == False:
     	favourites.add_to_favourites(recipe.id, user_id)
     	in_favourites = True
     else:
     	favourites.delete_from_favourites(recipe.id,user_id)
     	in_favourites = False
-
     liked= likes.check_if_liked(recipe_id, user_id)
     like_count = likes.count_likes(recipe_id)
     return render_template("recipe.html", name = recipe[0], content = recipe[1], user_id =user_id, recipe_id = recipe_id, in_favourites = in_favourites, liked=liked[0], likes = like_count[0]) 
@@ -153,14 +150,11 @@ def open_my_recipe(recipe_id):
 def like_function(recipe_id):
     recipe = recipes.get_recipe(recipe_id)
     user_id = session["user_id"]
-    liked= likes.check_if_liked(recipe_id, user_id)    
-    
+    liked= likes.check_if_liked(recipe_id, user_id)     
     if liked[0] == False:
-        likes.add_like(recipe_id, user_id)
-       
+        likes.add_like(recipe_id, user_id)   
     if liked[0] == True:
-        likes.delete_like(recipe_id, user_id)
-        
+        likes.delete_like(recipe_id, user_id)    
     in_favourites = favourites.check_if_in_favourites(recipe.id, user_id)
     liked= likes.check_if_liked(recipe_id, user_id)
     like_count = likes.count_likes(recipe_id)
