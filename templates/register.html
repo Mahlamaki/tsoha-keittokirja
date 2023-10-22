@@ -1,22 +1,53 @@
-<h2>Luo uusi käyttäjätunnus</h2>
-
-<form action="/create_user" method="POST">
-Tunnus:
- <p>
-<input type="text" name="username" minlength="1" maxlength="25">
-<p>
-Salasana: 
-<p>
-<input type="password" name="password1" minlength="1" maxlength="25">
-<p>
-Salasana uudestaan:
-<p>
-<input type="password" name="password2" minlength="1" maxlength="25">
-<p>
-<input type="submit" value="Luo tunnus">
-</form>
-<p>
-{{message}}
-<p>
-<a href="/">Peruuta</a>
-
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<title>Etusivu</title>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+        <br>
+        <br>
+        <h1>WEB KEITTOKIRJA</h1>
+        <p>
+        <b>Tervetuloa</b>!
+        <br>
+        <br>
+        <br>
+        <br>
+          Web keittokirjassa voit:
+          <ul>
+           <li> Selailla muiden laatimia reseptejä ruokalajeittain
+           <li> Luoda omia reseptejä
+           <li> Tykkäillä muiden resepteistä
+           <li> Lisätä reseptejä suosikkeihisi
+         </ul>
+    </div>
+    <div class="col-4">
+      <br>
+      <br>
+      <h6>Luo uusi käyttäjätunnus</h6>
+      <br>
+      <br>
+      <form action="/create_user" method="POST">
+      Tunnus:
+      <p>
+      <input type="text" name="username" minlength="1" maxlength="25">
+      <p>
+      Salasana:
+      <p>
+      <input type="password" name="password1" minlength="1" maxlength="25">
+      <p>
+      Salasana uudestaan:
+      <p>
+      <input type="password" name="password2" minlength="1" maxlength="25">
+      <p>
+      <input class="btn btn-primary" type="submit" value="Luo tunnus">
+      </form>
+      <p>
+      {{message}}
+      <p>
+      <a href="/">Peruuta</a>
+    </div>
+  </div>
+</div>
+   
